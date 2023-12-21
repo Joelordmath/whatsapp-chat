@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #phoneInput {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #openChatBtn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>WhatsApp Chat</h1>
+
+    <label for="phoneInput">Ingrese el número de teléfono:</label>
+    <input type="text" id="phoneInput" placeholder="xxxxxxxxxxx">
+
+    <br><br>
+
+    <button id="openChatBtn" onclick="openWhatsAppChat()">Abrir Chat</button>
+
+    <script>
+        function openWhatsAppChat() {
+            // Obtener el valor del número de teléfono
+            var phoneNumber = document.getElementById("phoneInput").value;
+    
+            // Verificar si se ingresó un número
+            if (phoneNumber.trim() !== "") {
+                // Construir la URL de WhatsApp
+                var whatsappURL = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text&type=phone_number&app_absent=0`;
+    
+                // Redirigir a la URL de WhatsApp
+                window.location.href = whatsappURL;
+            } else {
+                alert("Por favor, ingrese un número de teléfono.");
+            }
+        }
+    
+        // Agregar el evento de teclado al campo de entrada
+        document.getElementById("phoneInput").addEventListener("keyup", function(event) {
+            // Verificar si la tecla presionada es Enter (código 13)
+            if (event.keyCode === 13) {
+                // Simular clic en el botón "Open Chat"
+                document.getElementById("openChatBtn").click();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
