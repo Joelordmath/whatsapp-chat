@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Chat</title>
+    <title>WhatsApp Chat</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,44 +12,61 @@
             margin: 20px;
         }
 
+        #areaCodeInput,
         #phoneInput {
             padding: 8px;
             font-size: 16px;
         }
 
-        #openChatBtn {
+        #openChatBtn 
+        {
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
+            background: #128c7e;
+            color: #ffffff;
+            border: none;
+            text-align: center;
+        
+        #whatsappIcon {
+            font-size: 24px;
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
 
-    <h1>WhatsApp Chat</h1>
+    <h1>
+        <span id="whatsappIcon" class="fab fa-whatsapp"></span>
+        WhatsApp Chat Redirect
+    </h1>
 
-    <label for="phoneInput">Ingrese el número de teléfono:</label>
-    <input type="text" id="phoneInput" placeholder="xxxxxxxxxxx">
+    <label for="areaCodeInput">Código del país (opcional): +</label>
+    <input type="text" id="areaCodeInput" placeholder="Ejemplo: 54">
 
     <br><br>
 
-    <button id="openChatBtn" onclick="openWhatsAppChat()">Abrir Chat</button>
+    <label for="phoneInput">Ingrese el número de teléfono:</label>
+    <input type="text" id="phoneInput" placeholder="xxxxxxxxxx">
+
+    <br><br>
+
+    <button id="openChatBtn" onclick="openWhatsAppChat()">
+        <span id="whatsappIcon" class="fab fa-whatsapp"></span>
+        Abrir Chat
+    </button>
 
     <script>
         function openWhatsAppChat() {
-            // Obtener el valor del número de teléfono
+            // Obtener el valor del código de área y del número de teléfono
+            var areaCode = document.getElementById("areaCodeInput").value;
             var phoneNumber = document.getElementById("phoneInput").value;
     
-            // Verificar si se ingresó un número
-            if (phoneNumber.trim() !== "") {
-                // Construir la URL de WhatsApp
-                var whatsappURL = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text&type=phone_number&app_absent=0`;
+            // Construir la URL de WhatsApp
+            var whatsappURL = `https://api.whatsapp.com/send/?phone=${areaCode}${phoneNumber}&text&type=phone_number&app_absent=0`;
     
-                // Redirigir a la URL de WhatsApp
-                window.location.href = whatsappURL;
-            } else {
-                alert("Por favor, ingrese un número de teléfono.");
-            }
+            // Redirigir a la URL de WhatsApp
+            window.location.href = whatsappURL;
         }
     
         // Agregar el evento de teclado al campo de entrada
@@ -63,6 +81,3 @@
 
 </body>
 </html>
-
-
-
